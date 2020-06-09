@@ -6,24 +6,29 @@ public class mainClass {
     public static final Scanner scan = new Scanner(System.in);
     public static int selectClass = 0;
     public static Player player = new Player();
+    public static final String path = "src/playerInfo";
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
 
-        int action = 0;
+        int action;
 
         do {
             action = getAction();
-            if (action == 1){
+            if (action == 1) {
                 raceSelection(player);
             }
-            if (action == 2){
+            if (action == 2) {
                 gameSave();
             }
-            if (action == 3){
+            if (action == 3) {
                 gameLoad();
             }
-            if (action == 4){
-                player.showClass();
+            if (action == 4) {
+                if (player.name == null) {
+                    System.out.println("You haven't created/selected a character yet :)");
+                } else {
+                    player.showClass();
+                }
             }
         } while (action != 5);
         System.out.println("Thank you for playing!");
@@ -64,23 +69,24 @@ public class mainClass {
         }
     }
 
-    private static void gameSave() {
-        try {
-            FileOutputStream fos = new FileOutputStream(new File("playerInfo.txt"));
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(player);
-        } catch (IOException e){
-            System.out.println("Error initializing stream");
-        }
+    private static void gameSave() throws IOException {
+        FileOutputStream fos = new FileOutputStream(path);
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+        oos.writeObject(player);
+        oos.close();
+        fos.close();
     }
 
-    private static void gameLoad(){
-        try {
-            FileInputStream fis = new FileInputStream(new File("playerInfo"));
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            Player player = (Player) ois.readObject();
-        } catch (IOException | ClassNotFoundException e){
-            System.out.println("Error initializing stream");
-        }
+    private static void gameLoad() throws IOException, ClassNotFoundException {
+        FileInputStream fis = new FileInputStream(path);
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        player = (Player) ois.readObject();
+        ois.close();
+        fis.close();
+        System.out.println("You have loaded your character " + player.toString());
+    }
+    public static void characterNaming() {
+        System.out.println("What's your name, Traveler?");
+        player.name = scan.next();
     }
 }
