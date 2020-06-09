@@ -1,0 +1,44 @@
+console RPG idea.
+
+Character creation
+name
+races
+classes
+stats depend on race and class.
+HP / MP / ATTACK / DEFENSE / XP / gender
+
+character selection
+character saving and loading functionality
+save/load to, from file.
+
+the in-game menu (should be comprehensive, with clear instructions, maybe with interface), with ability to select:
+your own profile / stats
+location where to go (basically, menu selection of locations)
+help command list
+additional actions / items / skills
+
+
+Fighting mechanics
+battle with monsters
+monster stats
+monster quantity until boss is found
+drop from monsters / bosses
+experience gain
+
+Death mechanic, what happens when you die
+
+
+
+
+
+further ideas:
+game story :
+quests, background, bosses, GUI. Later create save to/from db.
+
+
+
+
+who does what?
+
+Matas:
+Character creation (in-progress)
