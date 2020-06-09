@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class Player {
+public class Player implements Serializable {
 
     int health;
     int mana;
@@ -8,13 +9,11 @@ public class Player {
     int attack;
     String name;
 
-    Scanner scan = new Scanner(System.in);
-
     public void Elf() {
-        health = 10;
-        mana = 8;
-        defense = 5;
-        attack = 5;
+        health = 9;
+        mana = 9;
+        defense = 6;
+        attack = 4;
         characterNaming();
     }
 
@@ -26,15 +25,36 @@ public class Player {
         characterNaming();
     }
 
-    public void Orc(){
-        health = 12;
+    public void Orc() {
+        health = 14;
         mana = 4;
-        defense = 5;
+        defense = 2;
         attack = 8;
         characterNaming();
     }
 
-    public void showClass(){
+    Player() {
+    }
+
+    ;
+
+    Player(int health, int mana, int defense, int attack, String name) {
+        this.name = name;
+        this.health = health;
+        this.mana = mana;
+        this.defense = defense;
+        this.attack = attack;
+    }
+
+    @Override
+    public String toString() {
+        return "Name: " + name + "\n health: " + health + "\n mana: " + mana + "\n defense: " + defense +
+                "\n attack: " + attack;
+    }
+
+    Scanner scan = new Scanner(System.in);
+
+    public void showClass() {
         System.out.println("Your name is: " + this.name);
         System.out.println("Your health is: " + this.health);
         System.out.println("Your mana is: " + this.mana);
