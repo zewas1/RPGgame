@@ -58,4 +58,5 @@ public class Player implements Serializable {
         System.out.println("Your attack is: " + this.attack);
         System.out.println("Your defense is: " + this.defense);
     }
+
 }

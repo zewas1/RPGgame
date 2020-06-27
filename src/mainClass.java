@@ -1,12 +1,13 @@
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class mainClass {
 
-    public static final Scanner scan = new Scanner(System.in);
-    public static int selectClass = 0;
+    private static final Scanner scan = new Scanner(System.in);
     public static Player player = new Player();
-    public static final String path = "src/playerInfo";
+    private static final String path = "src/playerInfo.txt";
+    private static ArrayList<String> charList = new ArrayList<>();
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
@@ -32,7 +33,6 @@ public class mainClass {
             }
         } while (action != 5);
         System.out.println("Thank you for playing!");
-
     }
 
     private static int getAction() {
@@ -57,7 +57,7 @@ public class mainClass {
         System.out.println("|3. Orc.                                                     |");
         System.out.println("|============================================================|");
 
-        selectClass = scan.nextInt();
+        int selectClass = scan.nextInt();
         if (selectClass == 1) {
             player.Human();
         } else if (selectClass == 2) {
@@ -70,21 +70,26 @@ public class mainClass {
     }
 
     private static void gameSave() throws IOException {
-        FileOutputStream fos = new FileOutputStream(path);
-        ObjectOutputStream oos = new ObjectOutputStream(fos);
-        oos.writeObject(player);
-        oos.close();
-        fos.close();
+        boolean append = true;
+        charList.add(player.toString());
+        BufferedWriter writer = new BufferedWriter(new FileWriter(path,append));
+        for (String str : charList) {
+            writer.write(charList + System.lineSeparator());
+        }
+        writer.close();
+        charList.clear();
     }
 
     private static void gameLoad() throws IOException, ClassNotFoundException {
-        FileInputStream fis = new FileInputStream(path);
-        ObjectInputStream ois = new ObjectInputStream(fis);
-        player = (Player) ois.readObject();
-        ois.close();
-        fis.close();
+        charList.clear();
+        BufferedReader reader = new BufferedReader (new FileReader(path));
+        while(reader.ready()){
+            charList.add(reader.readLine());
+        }
+        reader.close();
         System.out.println("You have loaded your character " + player.toString());
     }
+
     public static void characterNaming() {
         System.out.println("What's your name, Traveler?");
         player.name = scan.next();

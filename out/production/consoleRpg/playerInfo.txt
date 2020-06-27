@@ -1,0 +1,15 @@
+[Name: 2
+ health: 9
+ mana: 9
+ defense: 6
+ attack: 4]
+[Name: 1
+ health: 10
+ mana: 8
+ defense: 5
+ attack: 5]
+[Name: 2
+ health: 14
+ mana: 4
+ defense: 2
+ attack: 8]
